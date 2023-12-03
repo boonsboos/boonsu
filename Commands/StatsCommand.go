@@ -29,7 +29,7 @@ func statsCommand(s *discordgo.Session, m *discordgo.Message, c []string) {
 			Inline: true,
 		},
 		&discordgo.MessageEmbedField{
-			Name:   "catabase size",
+			Name:   "database size",
 			Value:  database.GetDatabaseSize(),
 			Inline: true,
 		},

@@ -17,15 +17,12 @@ func DispatchCommands(sesh *discordgo.Session, e *discordgo.MessageCreate) {
 	}
 
 	message := strings.TrimLeft(e.Message.Content, "monke ")
-
 	if len(message) == 0 {
 		return
 	}
 
 	command := strings.Split(message, " ")
-
 	executor := all_commands[command[0]]
-
 	if executor == nil {
 		return
 	}
