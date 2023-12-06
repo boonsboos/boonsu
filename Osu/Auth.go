@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
 	"strings"
 	"time"
 
@@ -20,14 +21,17 @@ type authResponse struct {
 }
 
 func Authorize() {
+
+	form := url.Values{
+		"client_id":     {util.Options.OsuClientID},
+		"client_secret": {util.Options.OsuToken},
+		"grant_type":    {"client_credentials"},
+		"scope":         {"public"},
+	}
+
 	req, err := http.NewRequest("POST",
 		"https://osu.ppy.sh/oauth/token",
-		strings.NewReader(
-			"client_id="+util.Options.OsuClientID+
-				"&client_secret="+util.Options.OsuToken+
-				"&grant_type=client_credentials"+
-				"&scope=public",
-		),
+		strings.NewReader(form.Encode()),
 	)
 
 	if err != nil {

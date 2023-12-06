@@ -16,7 +16,7 @@ var Options BoonsuOptions
 type BoonsuOptions struct {
 	DiscordToken string `json:"discordToken"`
 	OsuToken     string `json:"osuToken"`
-	OsuClientID  string `json:"osuClientID"`
+	OsuClientID  string `json:"osuClient"`
 	DatabaseURL  string `json:"databaseURL"`
 }
 

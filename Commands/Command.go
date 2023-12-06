@@ -21,4 +21,5 @@ var all_commands = map[string]Command{
 	"ping":    pingCommand,
 	"linkosu": osuLinkCommand,
 	"stats":   statsCommand,
+	"osu":     osuProfileCommand,
 }

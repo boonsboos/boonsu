@@ -7,9 +7,15 @@ import (
 )
 
 func osuLinkCommand(s *discordgo.Session, m *discordgo.Message, c []string) {
+	if len(c) < 2 {
+		s.ChannelMessageSend(m.ChannelID, "You need to tell me your osu username too")
+		return
+	}
+
 	user, err := osu.GetUserByUsername(c[1])
 	if err != nil {
 		s.ChannelMessageSend(m.ChannelID, "Couldn't find that user")
+		return
 	}
 
 	err = database.SaveOsuDiscordLink(m.Author.ID, user.ID)

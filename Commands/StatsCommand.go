@@ -17,33 +17,31 @@ var statsCommandEmbed discordgo.MessageEmbed = discordgo.MessageEmbed{
 
 func statsCommand(s *discordgo.Session, m *discordgo.Message, c []string) {
 
-	statsCommandEmbed.Fields = append(statsCommandEmbed.Fields,
-		&discordgo.MessageEmbedField{
+	statsCommandEmbed.Fields = []*discordgo.MessageEmbedField{
+		{
 			Name:   "version",
 			Value:  util.Version,
 			Inline: true,
 		},
-		&discordgo.MessageEmbedField{
+		{
 			Name:   "commands ran",
 			Value:  strconv.FormatUint(database.GetCommandsRan(), 10),
 			Inline: true,
 		},
-		&discordgo.MessageEmbedField{
+		{
 			Name:   "database size",
 			Value:  database.GetDatabaseSize(),
 			Inline: true,
 		},
-		&discordgo.MessageEmbedField{
+		{
 			Name:   "tillerino version",
 			Value:  "shooting for compatibility with `bc40b3d`",
 			Inline: true,
 		},
-	)
+	}
 
 	_, err := s.ChannelMessageSendEmbed(m.ChannelID, &statsCommandEmbed)
 	if err != nil {
 		log.Fatal("failed to make stats")
 	}
-
-	statsCommandEmbed.Fields = []*discordgo.MessageEmbedField{}
 }
