@@ -10,7 +10,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func osuTopCommand(s *discordgo.Session, m *discordgo.Message, c []string) {
+func osuRecentCommand(s *discordgo.Session, m *discordgo.Message, c []string) {
 	var osuID int = 0
 
 	if len(c) > 1 && len(m.Mentions) > 0 && strings.HasPrefix(c[1], "<@") {
@@ -29,7 +29,7 @@ func osuTopCommand(s *discordgo.Session, m *discordgo.Message, c []string) {
 		osuID = i
 	}
 
-	score, err := osu.GetBestScoreFromUser(osuID)
+	score, err := osu.GetMostRecentScoreFromUser(osuID)
 	if err != nil {
 		log.Println("user for " + strconv.Itoa(osuID) + " not found")
 		s.ChannelMessageSend(m.ChannelID, "Could not get your score")
@@ -49,7 +49,7 @@ func osuTopCommand(s *discordgo.Session, m *discordgo.Message, c []string) {
 			URL: osu.BeatmapImageLink(score.Map.MapsetID),
 		},
 		Footer: &discordgo.MessageEmbedFooter{
-			Text: "Best score of " + score.Player.Username,
+			Text: "Played by " + score.Player.Username,
 		},
 		Fields: []*discordgo.MessageEmbedField{
 			{

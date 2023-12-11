@@ -22,4 +22,6 @@ var all_commands = map[string]Command{
 	"linkosu": osuLinkCommand,
 	"stats":   statsCommand,
 	"osu":     osuProfileCommand,
+	"osutop":  osuTopCommand,
+	"rs":      osuRecentCommand,
 }
