@@ -99,3 +99,15 @@ func (s Score) GetHitInfo() string {
 		strconv.Itoa(s.HitInfo.Count50) + "/" +
 		strconv.Itoa(s.HitInfo.CountMiss)
 }
+
+func (s Score) GetMods() string {
+	if len(s.Mods) == 0 {
+		return "nomod"
+	}
+
+	var r string
+	for _, i := range s.Mods {
+		r += i
+	}
+	return r
+}

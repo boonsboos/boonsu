@@ -44,7 +44,8 @@ func osuRecentCommand(s *discordgo.Session, m *discordgo.Message, c []string) {
 	}
 
 	embed := discordgo.MessageEmbed{
-		Title: score.GetMapInfo(),
+		Title: score.GetMapInfo() + " +" + score.GetMods(),
+		URL:   score.Map.URL,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: osu.BeatmapImageLink(score.Map.MapsetID),
 		},
@@ -61,10 +62,14 @@ func osuRecentCommand(s *discordgo.Session, m *discordgo.Message, c []string) {
 				Inline: true,
 			},
 			{
-				Value: strconv.Itoa(score.MaxCombo) + "/" + strconv.Itoa(beatmap.MaxCombo),
+				Value: strconv.Itoa(score.MaxCombo) + "/" + strconv.Itoa(beatmap.MaxCombo) + "x",
 			},
 			{
 				Value:  strconv.FormatFloat(score.Accuracy*100, 'f', 2, 64) + "%",
+				Inline: true,
+			},
+			{
+				Value:  score.Rank,
 				Inline: true,
 			},
 		},
